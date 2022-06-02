@@ -53,6 +53,7 @@ app.get('/tasklists/:tasklistID', (req, res) =>
     })
     .catch((error)=>{console.log(error)});
 }
+
 )
 
 //PUT METHOD IS FULL UPDATE, 
@@ -81,6 +82,56 @@ app.delete('/tasklists/:tasklistID', (req,res)=>{
     .catch((error)=>{console.log(error)});
 }) 
 
+//Oerations regarding single tasks 
+
+//Create A Task inside a particulat task list
+app.post('/tasklists/:tasklistId/tasks', (req, res) =>{
+    // console.log("Hello inside Post Method");
+    console.log(req.body);
+    let taskObj = {'title': req.body.title, '_taskListId':req.params.tasklistId};
+    Task(taskObj).save()
+    .then((task)=>{
+        res.status(201).send(task);
+        })
+    .catch((error)=>{console.log(error)});
+});
+
+// Get all tasks related to one task lisk
+
+app.get('/tasklists/:tasklistId/tasks', (req, res) => {
+    console.log("Hello World");
+    Task.find({ _taskListId: req.params.tasklistId })
+        .then((tasks) => {
+            res.status(200).send(tasks)
+        })
+        .catch((error) => { console.log(error) });
+});
+
+//Get one particular task from id
+app.get('/tasklists/:tasklistId/tasks/:taskId', (req, res) => {
+    Task.findOne({ _taskListId: req.params.tasklistId, _id:req.params.taskId })
+        .then((tasks) => {
+            res.status(200).send(tasks)
+        })
+        .catch((error) => { console.log(error) });
+});
+
+//patch one particular task from task list id as well as task id, & query,multi parameter
+app.patch('/tasklists/:tasklistId/tasks/:taskId', (req,res)=>{
+    Task.findOneAndUpdate({_taskListId:req.params.tasklistId, _id:req.params.taskId},{$set:req.body})
+    .then((task)=>{
+        res.status(200).send(task)
+    })
+    .catch(error=>{console.log(error)});
+})
+//Delete single tast in one task list
+app.delete('/tasklists/:tasklistId/tasks/:taskId', (req,res)=>{
+    Task.findOneAndDelete({_taskListId:req.params.tasklistId, _id:req.params.taskId})
+    .then((task)=>{
+        res.status(200).send(task)
+    })
+    .catch(error=>{console.log(error)});
+})
 
 
 
