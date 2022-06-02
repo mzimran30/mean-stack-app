@@ -1,0 +1,24 @@
+{
+  "name": "mean-stack-app",
+  "version": "1.0.0",
+  "description": "mean-stack-appa",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mzimran30/mean-stack-app.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mzimran30/mean-stack-app/issues"
+  },
+  "homepage": "https://github.com/mzimran30/mean-stack-app#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.5"
+  }
+}
